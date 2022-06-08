@@ -1,5 +1,5 @@
 # EEC193 Smart Air Filter
-Here are the codes of EEC193 Smart Air Filter project from team RSQ @angl19 <br/>
+Here are the codes of EEC193 Smart Air Filter project from team RSQ [@angl19](https://github.com/angl19) and [@HTZhong2000](https://github.com/HTZhong2000)<br/>
 We have four parts of code in the project
 ## APP
 For APP code, we have a Main acvitivity file and several fragment files for each function in the app
