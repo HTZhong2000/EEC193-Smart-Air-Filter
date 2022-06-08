@@ -1,5 +1,4 @@
 # EEC193 Smart Air Filter
-Built by @HTZhong2000 and @angl19
 Here are the codes of EEC193 Smart Air Filter project from team RSQ
 We have four parts of code in the project
 ## APP
