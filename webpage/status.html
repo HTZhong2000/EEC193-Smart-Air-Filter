@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Live Status</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload" onload="init()">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>TEAM</strong>RSQ</a>
+			<nav>
+				<a id="login"></a>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="status.html">Live Status</a></li>
+				<li><a href="panel.html">Control Panel</a></li>
+				<li><a href="elements.html">Records</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="#" class="button primary fit">Get Started</a></li>
+				<li><a href="login.html" class="button fit" id="btn1">Log In</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<!-- Note: The "styleN" class below should match that of the header element. -->
+		<section id="banner" class="style2">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic07.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Live Status</h1>
+				</header>
+				<div class="content">
+					<p>Lorem ipsum dolor sit amet nullam consequat<br />
+						sed veroeros. tempus adipiscing nulla.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<div class="inner">
+
+					<header class="minor">
+						<h2>Temperature</h2>
+					</header>
+					<div class="row">
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>Fahrenheit</h2>
+								<h4>Raw:</h4>
+								<h3 id="F_raw"> N/A °F</h3>
+							</div>
+						</div>
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>Celsius</h2>
+								<h4>Raw:</h4>
+								<h3 id="C_raw"> N/A °C</h3>
+							</div>
+						</div>
+					</div>
+
+					<header class="minor">
+						<h2>Humidity</h2>
+					</header>
+					<div class="box">
+						<h3 id="humid"> N/A %</h3>
+					</div>
+
+
+					<header class="minor">
+						<h2>Particle</h2>
+					</header>
+					<div class="row">
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>PM2.5</h2>
+								<h3 id="PM25"> N/A μg/m³</h3>
+							</div>
+						</div>
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>PM10</h2>
+								<h3 id="PM10"> N/A μg/m³</h3>
+							</div>
+						</div>
+					</div>
+
+					<header class="minor">
+						<h2>Fan Power</h2>
+					</header>
+					<div class="row">
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>Status</h2>
+								<h2 id="fan"> N/A % </h3>
+							</div>
+						</div>
+						<div class="col-6 col-12-small">
+							<div class="box">
+								<h2>Switch</h2>
+								<input type="submit" id="btn" value="123" class="button fit" onclick="postAPI()">
+							</div>
+						</div>
+					</div>
+
+					<header class="minor">
+						<h2>Occupancy</h2>
+					</header>
+					<div class="box">
+						<h3 id="occupancy"> N/A </h3>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Team RSQ</li>
+					<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<script>
+
+		function init() // This is the function the browser first runs when it's loaded.
+		{
+			callAuth();
+			callAPI(); // Then runs the refresh function for the first time.
+			var int = self.setInterval(function () {
+				callAPI()
+			}, 1000); // Set the refresh() function to run every 10 seconds. [1 second would be 1000, and 1/10th of a second would be 100 etc.
+		}
+
+		var callAuth = () => {
+			var IP;
+
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Content-Type", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var requestOptions1 = {
+				method: 'GET',
+				headers: myHeaders,
+				redirect: 'follow'
+			};
+
+			// make API call with parameters and use promises to get response
+			fetch("https://api.ipify.org/?format=json", requestOptions1)
+				.then(response => response.text())
+				.then(
+					//function (result) {
+					result => JSON.parse(result).ip
+					//}
+				)
+				.then(
+					function (IP) {
+						var raw = JSON.stringify(
+							{
+								Auth: 1,
+								IP: IP,
+								Timestamp: Date.now()
+							}
+						);
+
+						// create a JSON object with parameters for API call and store in a variable
+						var requestOptions2 = {
+							method: 'POST',
+							headers: myHeaders,
+							body: raw,
+							redirect: 'follow'
+						};
+
+						fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_LOGIN_CHK", requestOptions2)
+							.then(response => response.text())
+							.then(
+								function (result) {
+									var res = JSON.parse(result).body;
+
+									if (res == "Invalid" || res == "NotFound") {
+										document.getElementById("login").innerText = "LOGIN";
+										document.getElementById("login").href = "login.html";
+									}
+									else {
+										document.getElementById("login").innerText = 'Welcome, ' + res;
+										document.getElementById("btn1").style.display = 'none';
+									}
+
+								}
+							)
+							.catch(error => console.log('error', error));
+					}
+				)
+				.catch(error => console.log('error', error));
+
+
+
+			// make API call with parameters and use promises to get response
+
+		}
+
+		// define the callAPI function that takes a first name and last name as parameters
+		var callAPI = () => {
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Accept", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var raw = JSON.stringify();
+			// create a JSON object with parameters for API call and store in a variable
+			var requestOptions = {
+				method: 'GET',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			//fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+			fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+						var res = JSON.parse(result).body;
+						var tmpF = document.getElementById('F_raw')
+						var tmpC = document.getElementById('C_raw')
+						var pm25 = document.getElementById('PM25')
+						var pm10 = document.getElementById('PM10')
+						var humid = document.getElementById('humid')
+						var fan = document.getElementById('fan')
+						var occupancy = document.getElementById('occupancy');
+						var btn = document.getElementById('btn')
+
+						tmpF.innerText = res.TemperatureF + ' °F';
+						tmpC.innerText = res.TemperatureC + ' °C';
+						humid.innerText = res.Humidity + ' %';
+						pm25.innerText = res.PM25 + ' μg/m³';
+						pm10.innerText = res.PM10 + ' μg/m³';
+						if (res.Fan == true)
+						{
+							fan.innerText = "ON";
+							btn.value = "Turn Off"
+						}
+						else
+						{
+							fan.innerText = "OFF";
+							btn.value = "Turn On"
+						}
+						if (res.PIR == true)
+							occupancy.innerText = "Yes";
+						else
+							occupancy.innerText = "No";
+					}
+				)
+				.catch(error => console.log('error', error));
+			
+
+
+		}
+
+		var postAPI = () => {
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Accept", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var fanres;
+			if (document.getElementById('fan').innerText == "ON")
+				fanres = 0;
+			else if (document.getElementById('fan').innerText == "OFF")
+				fanres = 1;
+			var raw = JSON.stringify(
+				{
+					Timestamp: Date.now(),
+					Device: "test",
+					Client: "Web",
+					tmpF: 0,
+					tmpC: 0,
+					humid: 0,
+					PM25: 0,
+					PM10: 0,
+					PIR: 0,
+					ctrlMode: 0,
+					Fan: fanres
+				}
+			);
+			// create a JSON object with parameters for API call and store in a variable
+			var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			//fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+			fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_POST", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+
+
+						var recArr = JSON.parse(result).body;
+
+						console.log(recArr)
+					}
+				)
+				.catch(error => console.log('error', error));
+
+		}
+	</script>
+
+</body>
+
+</html>

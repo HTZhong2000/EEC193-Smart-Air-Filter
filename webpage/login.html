@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Smart Air Filter</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload" onload="init()">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>TEAM</strong>RSQ</a>
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="status.html">Live Status</a></li>
+				<li><a href="panel.html">Control Panel</a></li>
+				<li><a href="elements.html">Records</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="#" class="button primary fit">Get Started</a></li>
+				<li><a href="login.html" class="button fit">Log In</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<section id="banner" class="style1">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic08.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Log In</h1>
+				</header>
+			</div>
+		</section>
+
+		<div id="main" class="alt">
+			<section>
+				<div class="inner">
+					<div class="fit">
+						<div>
+							<h4>Username</h4>
+							<input type="email" placeholder="Your email address" name="Username" id="username" />
+						</div>
+						<br>
+						<div>
+							<h4>Password</h4>
+							<input type="password" name="Password" id="password" />
+						</div>
+						<br>
+						<div style="display:none" id="verify">
+							<h4>Verification code</h4>
+							<input type="text" id="code" />
+						</div>
+						<br>
+						<div>
+							<label style="color: tomato;" id="response"></label>
+						</div>
+						<ul class="actions fit">
+							<li><input type="submit" value="Log In" onclick="submit()" class="button primary fit" />
+							</li>
+							<li><input type="reset" onclick="window.location.href='register.html'" value="New Account"
+									class="button fit" />
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<li>&copy; Team RSQ</li>
+					<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<script>
+		var IP;
+		var isSuccess = 0;
+
+		function init() {
+			getIP();
+		}
+		// Get the modal
+		var modal = document.getElementById("myModal");
+
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display =
+					"none";
+			}
+		}
+
+		function submit() // This is the function the browser first runs when it's loaded.
+		{
+			const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/g;
+			const ismatch = document.getElementById('username').value.match(regex)
+			if (ismatch != null) {
+				if (document.getElementById('username').value != "") {
+					if (document.getElementById('password').value != "") {
+						console.log(isSuccess)
+						callAPI(0, isSuccess);
+					}
+					else
+						document.getElementById("response").innerText = "Please enter password!";
+				}
+				else
+					document.getElementById("response").innerText = "Please enter username!";
+			}
+			else
+				document.getElementById("response").innerText = "Please enter valid email address as username!";
+		}
+
+
+		function create() // This is the function the browser first runs when it's loaded.
+		{
+			if (document.getElementById('username').value != "") {
+				if (document.getElementById('password').value != "")
+					callAPI(1);
+				else
+					document.getElementById("response").innerText = "Please enter password!";
+			}
+			else
+				document.getElementById("response").innerText = "Please enter username!";
+		}
+
+		var getIP = () => {
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Content-Type", "application/json");
+
+			var requestOptions = {
+				method: 'GET',
+				headers: myHeaders,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			fetch("https://api.ipify.org/?format=json", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+						IP = JSON.parse(result).ip;
+					}
+				)
+				.catch(error => console.log('error', error));
+		}
+
+		// define the callAPI function that takes a first name and last name as parameters
+		var callAPI = (submitType, state) => {
+			if (state == 0) {
+				// instantiate a headers object
+				var myHeaders = new Headers();
+				// add content type header to object
+				myHeaders.append("Content-Type", "application/json");
+				// using built in JSON utility package turn object to string and store in a variable
+				if (submitType == 0)
+					var raw = JSON.stringify(
+						{
+							Type: 0,
+							Username: document.getElementById('username').value,
+							Password: document.getElementById('password').value,
+							IP: IP,
+							Timestamp: Date.now()
+						}
+					);
+				else if (submitType == 1)
+					var raw = JSON.stringify(
+						{
+							Type: 1,
+							Username: document.getElementById('username').value,
+							Password: document.getElementById('password').value,
+							IP: IP,
+							Timestamp: Date.now()
+						}
+					);
+				// create a JSON object with parameters for API call and store in a variable
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				// make API call with parameters and use promises to get response
+				fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_LOGIN", requestOptions)
+					.then(response => response.text())
+					.then(
+						function (result) {
+							var res = JSON.parse(result).body;
+							if (res == "SUCCESS") {
+								document.getElementById("response").innerText = "Please enter validation code"
+								document.getElementById("verify").style.display = "block"
+								isSuccess = 1
+							}
+							else if (res == "NOT_EXIST")
+								document.getElementById("response").innerText = "User does not exist!";
+							else if (res == "WRONG_PASSWORD") {
+								document.getElementById('password').value = "";
+								document.getElementById("response").innerText = "Incorrect password!";
+							}
+							else if (res == "ACC_EXIST") {
+								document.getElementById('password').value = "";
+								document.getElementById("response").innerText = "Account already exists!";
+							}
+							else if (res == "ACC_CREATE") {
+								document.getElementById('password').value = "";
+								document.getElementById("response").innerText = "Account created! Please log in.";
+							}
+						}
+					)
+					.catch(error => console.log('error', error));
+
+			}
+			else if (state == 1) {
+				// instantiate a headers object
+				var myHeaders = new Headers();
+				// add content type header to object
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify(
+					{
+						Token: document.getElementById('code').value,
+						Username: document.getElementById('username').value,
+						IP: IP,
+						Timestamp: Date.now()
+					}
+				);
+				// create a JSON object with parameters for API call and store in a variable
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				// make API call with parameters and use promises to get response
+				fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_Verify", requestOptions)
+					.then(response => response.text())
+					.then(
+						function (result) {
+							var res = JSON.parse(result).body;
+							if (res == 'WRONG_TOKEN')
+								document.getElementById("response").innerText = "Invalid verification code";
+							else if (res == "SUCCESS")
+								window.location.href = 'index.html'
+						}
+					)
+					.catch(error => console.log('error', error));
+			}
+		}
+	</script>
+
+</body>
+
+</html>

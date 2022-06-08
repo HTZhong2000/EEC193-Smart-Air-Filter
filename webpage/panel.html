@@ -1,0 +1,547 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Control Panel</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<style>
+		.slidecontainer {
+			width: 100%;
+		}
+
+		.slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 25px;
+			background: #303450;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .4s;
+			transition: opacity .4s;
+		}
+
+		.slider:hover {
+			opacity: 1;
+		}
+
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 25px;
+			height: 25px;
+			background: #ffffff;
+			cursor: pointer;
+		}
+
+		.slider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			background: #ffffff;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body class="is-preload" onload="init()">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>TEAM</strong>RSQ</a>
+			<nav>
+				<a id="login"></a>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="status.html">Live Status</a></li>
+				<li><a href="panel.html">Control Panel</a></li>
+				<li><a href="elements.html">Records</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="#" class="button primary fit">Get Started</a></li>
+				<li><a href="login.html" class="button fit" id="btn1">Log In</a></li>
+			</ul>
+		</nav>
+
+		<section id="banner" class="style2">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic08.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Control Panel</h1>
+				</header>
+				<div class="content" id="test">
+					<p>Lorem ipsum dolor sit amet nullam consequat<br />
+						sed veroeros. tempus adipiscing nulla.</p>
+				</div>
+			</div>
+		</section>
+
+		<div id="main">
+			<section id="one">
+
+
+				<div class="inner">
+					<div class="col-6 col-12-medium">
+						<section>
+							<div class="box">
+								<header class="minor">
+									<h2>Control</h2>
+								</header>
+
+								<input type="checkbox" id="enable" onclick="clickUpdate()">
+								<label for="enable">Enable</label>
+
+								<div class="row" id="dropdown" style="display: none;">
+									<div class="col-4 col-12-small">
+										<select onchange="selectUpdate()" id="sel">
+											<option value="">- Select Mode -</option>
+											<option value="1">Schedule</option>
+											<option value="2">Threshold</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="box" id="schebox" style="display: none">
+								<header class="minor">
+									<h2>Schedule</h2>
+								</header>
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>Start from:</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="start" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>:00</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>Ends at:</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="end" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>:00</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<h4 style="color: tomato" id="warn"></h4>
+								</div>
+								<div>
+									<input id="scheduleSet" type="submit" value="Schedule" class="button"
+										onclick="sche()">
+								</div>
+
+								<br><br>
+								<header class="minor">
+									<h2>Current Schedule</h2>
+								</header>
+								<div class="row">
+									<div id="info1">Currently have no schedule.</div>
+								</div>
+							</div>
+
+							<div class="box" style="display: none">
+								<header class="minor">
+									<h2>Running Pattern</h2>
+								</header>
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>Run</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="run" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>Seconds</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>Stop</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="stop" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>Seconds</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<input id="patternSet" type="submit" value="Set" class="button">
+									</div>
+								</div>
+								<br><br>
+								<header class="minor">
+									<h2>Current Pattern</h2>
+								</header>
+								<div class="row">
+									<div id="info2">Currently have no pattern set up.</div>
+								</div>
+							</div>
+
+							<div class="box" id="thresbox" style="display: none">
+								<header class="minor">
+									<h2>Threshold</h2>
+									<h4>System will start when readings higher than:</h4>
+								</header>
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>PM2.5</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="PM25" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>μg/m³</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-6 col-12-small">
+										<div class="box">
+											<label>PM10</label>
+											<div class="row">
+												<div class="col-6 col-12-small">
+													<input id="PM10" type="number"
+														style="background-color:#ffffff; color: black;">
+												</div>
+												<div class="col-6 col-12-small">
+													<h4>μg/m³</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<input id="thresSet" type="submit" value="Set" class="button"
+											onclick="rst(3,PM10.value,PM25.value)">
+									</div>
+								</div>
+								<br><br>
+								<header class="minor">
+									<h2>Current Threshold</h2>
+								</header>
+								<div class="row">
+									<div id="info3">Currently have no threshold set up.</div>
+								</div>
+							</div>
+
+						</section>
+					</div>
+				</div>
+
+			</section>
+		</div>
+
+
+
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<li>&copy; Team RSQ</li>
+					<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+
+		function init() {
+			callAuth();
+			upd();
+		}
+
+		var hrs, hre, pm10, pm25;
+
+		function sche() {
+			var start = document.getElementById("start").value
+			var end = document.getElementById("end").value
+			if (start >= 0 && start <= 23 && end >= 0 && end <= 23)
+				rst(1, start, end)
+			else
+				document.getElementById("warn").innerText = "Please enter valid number from 0 to 23"
+		}
+
+		function clickUpdate() {
+			var thres = document.getElementById('thresbox')
+			var sche = document.getElementById('schebox')
+			if (document.getElementById('enable').checked)
+				document.getElementById('dropdown').style.display = 'block'
+			else {
+				document.getElementById('dropdown').style.display = 'none'
+				thres.style.display = "none"
+				sche.style.display = "none"
+				rst('0',0,0)
+			}
+		}
+
+
+		function selectUpdate() {
+			var select = document.getElementById('sel')
+			var thres = document.getElementById('thresbox')
+			var sche = document.getElementById('schebox')
+			if (select.value == '1') {
+				thres.style.display = "none"
+				sche.style.display = "block"
+			}
+			else if (select.value == '2') {
+				thres.style.display = "block"
+				sche.style.display = "none"
+			}
+			else {
+				thres.style.display = "none"
+				sche.style.display = "none"
+			}
+			console.log(select.value)
+		}
+
+		var upd = () => {
+			var select = document.getElementById('sel')
+			var thres = document.getElementById('thresbox')
+			var sche = document.getElementById('schebox')
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Accept", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var raw = JSON.stringify();
+			// create a JSON object with parameters for API call and store in a variable
+			var requestOptions = {
+				method: 'GET',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			//fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+			fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_Getplan", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+						var res = JSON.parse(result).body;
+						if (res.Start_time == 0 && res.End_time == 0)
+							document.getElementById("info1").innerText = 'Currently have no schedule.'
+						else {
+							hrs = res.Start_time
+							hre = res.End_time
+							document.getElementById("info1").innerText = 'From ' + hrs + ':00' + ' to ' + hre + ':00' + ' everyday'
+						}
+						if (res.Threshold_pm25 == 0 && res.Threshold_pm10 == 0)
+							document.getElementById("info3").innerText = 'Currently have no threshold set up.'
+						else {
+							pm10 = res.Threshold_pm10
+							pm25 = res.Threshold_pm25
+							document.getElementById("info3").innerText = 'PM2.5: ' + pm25 + ' μg/m³, ' + ' PM10: ' + pm10 + ' μg/m³'
+						}
+						if (res.Statec == '0') {
+							document.getElementById('enable').checked = false
+						}
+						else if (res.Statec == '1') {
+							document.getElementById('enable').checked = true
+							if (res.Typec == 'schedule') {
+								thres.style.display = "none"
+								sche.style.display = "block"
+							}
+							else if (res.Typec == 'threshold') {
+								thres.style.display = "block"
+								sche.style.display = "none"
+							}
+						}
+						console.log(res)
+					}
+				)
+
+				.catch(error => console.log('error', error));
+		}
+
+		var callAuth = () => {
+			var IP;
+
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Content-Type", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var requestOptions1 = {
+				method: 'GET',
+				headers: myHeaders,
+				redirect: 'follow'
+			};
+
+			// make API call with parameters and use promises to get response
+			fetch("https://api.ipify.org/?format=json", requestOptions1)
+				.then(response => response.text())
+				.then(
+					//function (result) {
+					result => JSON.parse(result).ip
+					//}
+				)
+				.then(
+					function (IP) {
+						var raw = JSON.stringify(
+							{
+								Auth: 1,
+								IP: IP,
+								Timestamp: Date.now()
+							}
+						);
+
+						// create a JSON object with parameters for API call and store in a variable
+						var requestOptions2 = {
+							method: 'POST',
+							headers: myHeaders,
+							body: raw,
+							redirect: 'follow'
+						};
+
+						fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_LOGIN_CHK", requestOptions2)
+							.then(response => response.text())
+							.then(
+								function (result) {
+									var res = JSON.parse(result).body;
+
+									if (res == "Invalid" || res == "NotFound") {
+										document.getElementById("login").innerText = "LOGIN";
+										document.getElementById("login").href = "login.html";
+									}
+									else {
+										document.getElementById("login").innerText = 'Welcome, ' + res;
+										document.getElementById("btn1").style.display = 'none';
+									}
+
+								}
+							)
+							.catch(error => console.log('error', error));
+					}
+				)
+				.catch(error => console.log('error', error));
+
+
+
+			// make API call with parameters and use promises to get response
+
+		}
+
+
+		var rst = (state, para1, para2) => {
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Accept", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var newHrs = 0
+			var newHre = 0
+			var newPM25 = 0
+			var newPM10 = 0
+			var newState = '0';
+			var newType = 'schedule';
+
+			switch (state) {
+				case 0:
+					newState = '0';
+					break;
+				case 1:
+					newHrs = para1;
+					newHre = para2;
+					if (newHrs == 0 && newHre == 0)
+						newState = '0'
+					else {
+						newState = '1'
+						newType = 'schedule'
+					}
+					break;
+				case 3:
+					newPM10 = para1;
+					newPM25 = para2;
+					if (newPM10 == 0 && newPM25 == 0)
+						newState = '0'
+					else {
+						newState = '1'
+						newType = 'threshold'
+					}
+					break;
+			}
+			var raw = JSON.stringify(
+				{
+					Device: "test",
+					State: newState,
+					Type: newType,
+					Threshold_pm10: newPM10,
+					Threshold_pm25: newPM25,
+					Start_time: newHrs,
+					End_time: newHre
+				}
+			);
+			// create a JSON object with parameters for API call and store in a variable
+			var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_SCHEDULE", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+						var res = JSON.parse(result).body;
+
+						//test.innerText = res.Fan + ' %';
+						//console.log(res.Fan);
+					}
+				)
+				.then(location.reload())
+				.catch(error => console.log('error', error));
+		}
+	</script>
+
+</body>
+
+</html>

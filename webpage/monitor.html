@@ -1,0 +1,448 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Records</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload" onload="init()">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>TEAM</strong>RSQ</a>
+			<nav>
+				<a id="login"></a>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="status.html">Live Status</a></li>
+				<li><a href="panel.html">Control Panel</a></li>
+				<li><a href="elements.html">Records</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="#" class="button primary fit">Get Started</a></li>
+				<li><a href="login.html" class="button fit" id="btn1">Log In</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<!-- Note: The "styleN" class below should match that of the header element. -->
+		<section id="banner" class="style6">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic07.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Monitor</h1>
+				</header>
+				<div class="content" id="test">
+					<p>Lorem ipsum dolor sit amet nullam consequat<br />
+						sed veroeros. tempus adipiscing nulla.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<div class="inner">
+					<header class="minor">
+						<h2>Chart</h2>
+					</header>
+					<div class="box">
+						<h4>Data category:</h4>
+						<div class="row gtr-uniform">
+							<div class="col-2 col-12-small">
+								<input type="checkbox" id="chkboxTmpc" onclick="clickUpdate()">
+								<label for="chkboxTmpc">Temperature (℃)</label>
+							</div>
+							<div class="col-2 col-12-small">
+								<input type="checkbox" id="chkboxTmpf" onclick="clickUpdate()">
+								<label for="chkboxTmpf">Temperature (℉)</label>
+							</div>
+							<div class="col-2 col-12-small">
+								<input type="checkbox" id="chkboxHmd" onclick="clickUpdate()">
+								<label for="chkboxHmd">Humidity</label>
+							</div>
+							<div class="col-2 col-12-small">
+								<input type="checkbox" id="chkboxPM25" onclick="clickUpdate()">
+								<label for="chkboxPM25">PM2.5</label>
+							</div>
+							<div class="col-2 col-12-small">
+								<input type="checkbox" id="chkboxPM10" onclick="clickUpdate()">
+								<label for="chkboxPM10">PM10</label>
+							</div>
+
+						</div>
+						<br>
+						<h4>Refreshing Rate</h4>
+						<div>
+							<select> <option value="">5s</option>
+								<option value="1">5s</option>
+							</select>
+						</div>
+						<br>
+
+						<canvas id="myChart" width="400" height="200"></canvas>
+					</div>
+
+					<hr class="major" />
+					<header class="minor">
+						<h2></h2>
+					</header>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>Time</th>
+									<th>Device</th>
+									<th>Fan</th>
+									<th>Temperature (℃)</th>
+									<th>Temperature (℉)</th>
+									<th>Humidity</th>
+									<th>PM2.5</th>
+									<th>PM10</th>
+									<th>Occupancy</th>
+								</tr>
+							</thead>
+							<tbody id="recTable">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Team RSQ</li>
+					<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+	<script>
+		//datasets
+		var dsTmpc = [];
+		var dsTmpf = [];
+		var dsHmd = [];
+		var dsPM25 = [];
+		var dsPM10 = [];
+
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const data = {
+			datasets: [
+				{
+					label: 'Temperature (℃)',
+					data: dsTmpc,
+					fill: false,
+					borderColor: 'rgb(75, 192, 192)',
+					hidden: true,
+					showLine: true
+				},
+				{
+					label: 'Temperature (℉)',
+					data: dsTmpf,
+					fill: false,
+					borderColor: 'rgb(255, 0, 65)',
+					hidden: true,
+					showLine: true
+				},
+				{
+					label: 'Humidity',
+					data: dsHmd,
+					fill: false,
+					borderColor: 'rgb(0, 255, 140)',
+					hidden: true,
+					showLine: true
+				},
+				{
+					label: 'PM 2.5',
+					data: dsPM25,
+					fill: false,
+					borderColor: 'rgb(255, 0, 220)',
+					hidden: true,
+					showLine: true
+				},
+				{
+					label: 'PM 10',
+					data: dsPM10,
+					fill: false,
+					borderColor: 'rgb(255, 230, 0)',
+					hidden: true,
+					showLine: true
+				}
+			]
+		};
+		const options = {
+			scales: {
+				x: {
+					type: 'time'
+				}
+			},
+			elements: {
+				showLine: true,
+				tension: 0.4,
+				point: {
+					radius: 4,
+					pointStyle: 'circle',
+					backgroundColor: Chart.defaults.borderColor
+				}
+			}
+		};
+		const config = {
+			type: 'scatter',
+			data: data,
+			options: options
+		};
+
+		const myChart = new Chart(ctx, config);
+
+		
+		function init() // This is the function the browser first runs when it's loaded.
+		{
+			callAuth();
+			callAPI(); // Then runs the refresh function for the first time.
+			var interval = 5000;
+			var int = self.setInterval(function () {
+				callAPI();
+				console.log("trig")
+			}, interval); // Set the refresh() function to run every 10 seconds. [1 second would be 1000, and 1/10th of a second would be 100 etc.
+		}
+
+		var callAuth = () => {
+			var IP;
+
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Content-Type", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var requestOptions1 = {
+				method: 'GET',
+				headers: myHeaders,
+				redirect: 'follow'
+			};
+
+			// make API call with parameters and use promises to get response
+			fetch("https://api.ipify.org/?format=json", requestOptions1)
+				.then(response => response.text())
+				.then(
+					//function (result) {
+					result => JSON.parse(result).ip
+					//}
+				)
+				.then(
+					function (IP) {
+						var raw = JSON.stringify(
+							{
+								Auth: 1,
+								IP: IP,
+								Timestamp: Date.now()
+							}
+						);
+
+						// create a JSON object with parameters for API call and store in a variable
+						var requestOptions2 = {
+							method: 'POST',
+							headers: myHeaders,
+							body: raw,
+							redirect: 'follow'
+						};
+
+						fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193_LOGIN_CHK", requestOptions2)
+							.then(response => response.text())
+							.then(
+								function (result) {
+									var res = JSON.parse(result).body;
+
+									if (res == "Invalid" || res == "NotFound") {
+										document.getElementById("login").innerText = "LOGIN";
+										document.getElementById("login").href = "login.html";
+									}
+									else {
+										document.getElementById("login").innerText = 'Welcome, ' + res;
+										document.getElementById("btn1").style.display = 'none';
+									}
+
+								}
+							)
+							.catch(error => console.log('error', error));
+					}
+				)
+				.catch(error => console.log('error', error));
+
+
+
+			// make API call with parameters and use promises to get response
+
+		}
+
+		var callAPI = () => {
+			// instantiate a headers object
+			var myHeaders = new Headers();
+			// add content type header to object
+			myHeaders.append("Accept", "application/json");
+			// using built in JSON utility package turn object to string and store in a variable
+			var raw = JSON.stringify();
+			// create a JSON object with parameters for API call and store in a variable
+			var requestOptions = {
+				method: 'GET',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			// make API call with parameters and use promises to get response
+			//fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+			fetch("https://7a1reou5uk.execute-api.us-west-2.amazonaws.com/default/EEC193", requestOptions)
+				.then(response => response.text())
+				.then(
+					function (result) {
+	
+
+						var res = JSON.parse(result).body;
+
+						var table = document.getElementById("recTable")
+						var rowCount = table.rows.length;
+						var lr = table.rows.length;
+						var newrow = table.insertRow(lr)
+						var time = newrow.insertCell(0)
+						var device = newrow.insertCell(1)
+						var fan = newrow.insertCell(2)
+						var tmpc = newrow.insertCell(3)
+						var tmpf = newrow.insertCell(4)
+						var humid = newrow.insertCell(5)
+						var pm25 = newrow.insertCell(6)
+						var pm10 = newrow.insertCell(7)
+						var pir = newrow.insertCell(8)
+
+						timenow = new Date()
+						time.innerText = timenow.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
+
+						device.innerText = res['Device']
+						if (res['Fan'] == 0)
+							fan.innerText = "OFF"
+						else
+							fan.innerText = "ON"
+						tmpc.innerText = res["TemperatureC"]
+						tmpf.innerText = res["TemperatureF"]
+						humid.innerText = res["Humidity"]
+						pm25.innerText = res["PM25"]
+						pm10.innerText = res["PM10"]
+						if (res['PIR'] == 0)
+							pir.innerText = "NO"
+						else
+							pir.innerText = "YES"
+
+						dsTmpc.push({
+							x: timenow,
+							y: res["TemperatureC"]
+						})
+						dsTmpf.push({
+							x: timenow,
+							y: res["TemperatureF"]
+						})
+						dsHmd.push({
+							x: timenow,
+							y: res["Humidity"]
+						})
+						dsPM25.push({
+							x: timenow,
+							y: res["PM25"]
+						})
+						dsPM10.push({
+							x: timenow,
+							y: res["PM10"]
+						})
+						console.log(dsTmpc)
+						myChart.update();
+					}
+				)
+				.catch(error => console.log('error', error));
+		}
+
+		function clickUpdate() {
+			var tmpcBox = document.getElementById("chkboxTmpc")
+			var tmpfBox = document.getElementById("chkboxTmpf")
+			var hmdBox = document.getElementById("chkboxHmd")
+			var pm25Box = document.getElementById("chkboxPM25")
+			var pm10Box = document.getElementById("chkboxPM10")
+
+			if (tmpcBox.checked)
+				data.datasets[0].hidden = false
+			else
+				data.datasets[0].hidden = true
+			if (tmpfBox.checked)
+				data.datasets[1].hidden = false
+			else
+				data.datasets[1].hidden = true
+			if (hmdBox.checked)
+				data.datasets[2].hidden = false
+			else
+				data.datasets[2].hidden = true
+			if (pm25Box.checked)
+				data.datasets[3].hidden = false
+			else
+				data.datasets[3].hidden = true
+			if (pm10Box.checked)
+				data.datasets[4].hidden = false
+			else
+				data.datasets[4].hidden = true
+
+			myChart.update();
+		}
+	</script>
+
+</body>
+
+</html>
